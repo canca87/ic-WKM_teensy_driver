@@ -1,50 +1,23 @@
 #ifndef __HARDWARE_DEF_H_
 #define __HARDWARE_DEF_H_
 
-#include <Arduino.h>
-#include <SPI.h>
-#include "ad5592.h"
+#include "Arduino.h"
 
-// Define any IO mappings here
-#define pin0 = 0
+/// defining IO pins for the teensy ///
+#define temperature_sensor_pin 23
+#define power_bank_A_address 0b0101110
+#define power_bank_B_address 0b0101111
 
-extern uint32_t watchdog_timeout_microseconds;
+#define CPU_RESTART_ADDR (uint32_t *)0xE000ED0C
+#define CPU_RESTART_VAL 0x5FA0004
+#define CPU_RESTART (*CPU_RESTART_ADDR = CPU_RESTART_VAL);
 
-// hardware related functions should go here:
-void run_stuff(void); //general dummy function for testing stuff.
-void init_hardware(void); // initialisation routine for hardware modules and IO.
+extern byte laser_PAC_address[6];
+extern byte laser_TTL_pin[6];
+extern byte laser_EEPROM_pin[6];
+extern byte laser_DIGIPOT_pin[6];
+extern byte laser_DIGIPOT_value[6];
 
-float read_ad5592_temperature(byte module);
-
-int read_ad5592_mode(byte module, byte io);
-
-int write_ad5592_mode(byte module, byte io, int mode);
-
-float read_ad5592_data(byte module, byte io);
-
-float write_ad5592_data(byte module, byte io, float val);
-
-byte read_eeprom_byte(byte module, uint16_t address);
-
-void write_eeprom_byte(byte module, uint16_t address, byte value);
-
-int save_laser_module_eeprom(byte module);
-
-int save_system_eeprom();
-
-int save_parameters_to_eeprom(void);
-
-int recall_laser_module_eeprom(byte module);
-
-int recall_system_eeprom();
-
-int recall_parameters_from_eeprom(void);
-
-byte check_eeprom_presence(byte module);
-
-double get_eeprom_version(byte module);
-
-int set_eeprom_version(byte module, double val);
-
+extern long watchdog_timeout_microseconds;
 
 #endif /* __HARDWARE_DEF_H_ */

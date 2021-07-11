@@ -31,13 +31,17 @@
 
 #include "scpi/scpi.h"
 #include "this_hardware.h"
+#include <OneWire.h>
+#include <EEPROM.h>
+#include <i2c_t3.h> //I2C for PSU setting and monitoring
+#include <SPI.h> //SPI for module EEPROM and power setting
 
 #define SCPI_INPUT_BUFFER_LENGTH 256
 #define SCPI_ERROR_QUEUE_SIZE 17
-#define SCPI_IDN1 "AlphaFoxtrotCharlie"
-#define SCPI_IDN2 "CapsuleSealTester"
-#define SCPI_IDN3 NULL
-#define SCPI_IDN4 "201026.1"
+#define SCPI_IDN1 "OptoTech"
+#define SCPI_IDN2 "AFC.10.07.2021"
+#define SCPI_IDN3 "LaserDriver"
+#define SCPI_IDN4 "1-channel"
 
 extern const scpi_command_t scpi_commands[];
 extern scpi_interface_t scpi_interface;
@@ -50,7 +54,6 @@ int SCPI_Error(scpi_t * context, int_fast16_t err);
 scpi_result_t SCPI_Control(scpi_t * context, scpi_ctrl_name_t ctrl, scpi_reg_val_t val);
 scpi_result_t SCPI_Reset(scpi_t * context);
 scpi_result_t SCPI_Flush(scpi_t * context);
-
 
 scpi_result_t SCPI_SystemCommTcpipControlQ(scpi_t * context);
 
