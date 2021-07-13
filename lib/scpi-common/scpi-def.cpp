@@ -1146,14 +1146,14 @@ static scpi_result_t GetEEPROM_dump(scpi_t * context) {
  */
 static scpi_result_t GetI2C(scpi_t * context) {
     int found = 0;
-    Serial.print("Starting scan...\n");
+    //Serial.print("Starting scan...\n");
     for(byte target = 1; target <= 0x7F; target++) // sweep addr, skip general call
     {
         Wire.beginTransmission(target);       // slave addr
         Wire.endTransmission();               // no data, just addr
         switch(Wire.status()){
             case I2C_WAITING:  
-                Serial.printf("Addr: 0x%02X ACK\n", target);
+                Serial.printf("0x%02X,", target);
                 found = 1;
                 break;
             case I2C_ADDR_NAK: 
@@ -1162,7 +1162,7 @@ static scpi_result_t GetI2C(scpi_t * context) {
                 break;
         }
     }
-    if(!found) Serial.print("No devices found.\n");
+    if(!found) Serial.print("No devices found.");
 
     return SCPI_RES_OK;
 }

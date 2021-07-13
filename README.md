@@ -17,3 +17,10 @@
 - Test the driver current monitor functin using the serial command **LASER:CURRENT? 1** which should return ~5mA when the laser is in the off state (default).
 - Test the laser enable signal **LASER:STAT 1,x** where x is either 0 for off or 1 for on. To test this, you will need to set the laser power to mid-range using the command **LASER:POWER 1,128**. Then toggle the laser on/off to observe the indicator LED.
 - Test the ability to set the power by trying **LAS:POWER 1,xxx** with different values of x between 0 and 254. Use the **LASER:CURRENT? 1** command to read the current and observe the current changing with the power level.
+
+Alternatively run the bringup_tests.py file included in the python_helper_scripts folder. It is designed to run on python 3.8 with the following packages:
+numpy == 1.19.1
+asciiplot == 0.1.1
+pyserial == 3.5
+rich == 10.5.0
+**See the requirements.txt file for all the python modules required**
