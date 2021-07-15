@@ -683,13 +683,13 @@ def test_power_ramp(ser,verbose=False):
     grid.add_column(justify="right", style="cyan")
     grid.add_column(style="yellow")
     grid.add_column(style="yellow")
-    set_nums = np.linspace(0,254,64)
-    get_nums = np.linspace(0,254,64)
+    set_nums = np.linspace(0,254,32)
+    get_nums = np.linspace(0,254,32)
     for i in set_nums:
         check_laser_state_on(ser,grid)
         check_power_set_mid_range(ser,grid,val=i)
         a,b = check_current_while_triggered(ser,grid)
-        get_nums[int(i/4)] = b
+        get_nums[int(i/8)] = b
     check_laser_state_off(ser,grid)
     print(asciiize(
         get_nums.tolist(),
